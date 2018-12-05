@@ -9,7 +9,7 @@ fn swap_case(c: u8) -> u8 {
 	}
 }
 
-pub fn solve1(input_text: &str) -> String {
+pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 	let mut polymer: VecDeque<u8> = input_text.trim().bytes().collect();
 	let mut i: usize = 0;
 	while i < (polymer.len() - 1) {
@@ -22,12 +22,12 @@ pub fn solve1(input_text: &str) -> String {
 		}
 		i += 1;
 	}
-	polymer.len().to_string()
+	Ok(polymer.len().to_string())
 }
 
 // Taken from /r/rust, it's fast and cool
-pub fn solve1b(input_text: &str) -> String {
-	input_text.trim().chars().fold(Vec::<char>::new(), |mut stack, c| {
+pub fn solve1b(input_text: &str) -> Result<String, &'static str> {
+	Ok(input_text.trim().chars().fold(Vec::<char>::new(), |mut stack, c| {
 		match stack.last().cloned() {
 			Some(v) if v != c && c.to_ascii_uppercase() == v.to_ascii_uppercase() => {
 				stack.pop();
@@ -35,7 +35,7 @@ pub fn solve1b(input_text: &str) -> String {
 			_ => stack.push(c)
 		}
 		stack
-	}).len().to_string()
+	}).len().to_string())
 }
 
 fn solve1b_but_first(input_text: &str) -> String {
@@ -63,7 +63,7 @@ fn solve1b_but_for_solve2(input_text: &str, vanish_c: char) -> usize {
 	}).len()
 }
 
-pub fn solve2(input_text: &str) -> String {
+pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 	let char_arr: Vec<char> = "abcdefghijklmnopqrtstuvwxyz".chars().collect();
 	let result_1 = solve1b_but_first(input_text);
 	let mut min: usize = 50001;
@@ -74,5 +74,5 @@ pub fn solve2(input_text: &str) -> String {
 		}
 	}
 
-	min.to_string()
+	Ok(min.to_string())
 }

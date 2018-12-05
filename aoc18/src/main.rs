@@ -37,9 +37,15 @@ fn main() {
     timeit(" 2", &day5::solve2, &data[..]);
 }
 
-fn timeit(part: &str, solver: &Fn(&str) -> String, input: &str) {
+fn timeit(part: &str, solver: &Fn(&str) -> Result<String, &'static str>, input: &str) {
     let start = Instant::now();
-    let result = solver(input);
+    let result = match solver(input) {
+        Ok(v) => v,
+        Err(e) => {
+            println!("{}", e);
+            return;
+        },
+    };
     let duration = start.elapsed();
     println!(
         "Part {}: '{}',     {}ms",

@@ -49,7 +49,7 @@ fn guards_insert() -> (usize, Vec<usize>) {
 	(0usize, vec![0usize;60])
 }
 
-pub fn solve1(input_text: &str) -> String {
+pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 	let mut parsed = parse_text(input_text);
 	let dates_to_guards = parsed.0;
 	let guards = &mut parsed.1;
@@ -81,10 +81,10 @@ pub fn solve1(input_text: &str) -> String {
 			max_min_time = i;
 		}
 	}
-	(max_guard_id * max_min_time).to_string()
+	Ok((max_guard_id * max_min_time).to_string())
 }
 
-pub fn solve2(input_text: &str) -> String {
+pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 	let mut parsed = parse_text(input_text);
 	let dates_to_guards = parsed.0;
 	let guards = &mut parsed.1;
@@ -110,5 +110,5 @@ pub fn solve2(input_text: &str) -> String {
 		}
 	}
 
-	(max_guard_id * minute).to_string()
+	Ok((max_guard_id * minute).to_string())
 }

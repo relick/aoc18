@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn solve1(input_text: &str) -> String {
+pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 	//regex
 	let re = Regex::new(r"#([0-9]+) @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9]+)").unwrap();
 	let mut data: Vec<(u32, u32, u32, u32)> = Vec::new();
@@ -28,10 +28,10 @@ pub fn solve1(input_text: &str) -> String {
 		}
 	}
 
-	total.to_string()
+	Ok(total.to_string())
 }
 
-pub fn solve2(input_text: &str) -> String {
+pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 	//regex
 	let re = Regex::new(r"#([0-9]+) @ ([0-9]+),([0-9]+): ([0-9]+)x([0-9]+)").unwrap();
 	let mut data: Vec<(u32, u32, u32, u32, bool)> = Vec::new();
@@ -64,9 +64,9 @@ pub fn solve2(input_text: &str) -> String {
 
 	for (id, d) in lazy_list.iter().enumerate() {
 		if !*d {
-			return (id + 1).to_string();
+			return Ok((id + 1).to_string());
 		}
 	}
 
-	0.to_string()
+	Err("Failed to find a result for Day 3 part 2")
 }

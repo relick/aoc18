@@ -1,14 +1,14 @@
 use std::collections::HashSet;
 
-pub fn solve1(input_text: &str) -> String {
+pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 	let mut total: i64 = 0;
 	for freq_str in input_text.lines() {
 		total += freq_str.parse::<i64>().unwrap();
 	}
-	total.to_string()
+	Ok(total.to_string())
 }
 
-pub fn solve2(input_text: &str) -> String {
+pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 	let mut freqs = Vec::new();
 	for freq_str in input_text.lines() {
 		freqs.push(freq_str.parse::<i64>().unwrap());
@@ -21,5 +21,5 @@ pub fn solve2(input_text: &str) -> String {
 		seen.insert(total);
 		total += iter.next().unwrap();
 	}
-	total.to_string()
+	Ok(total.to_string())
 }

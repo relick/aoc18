@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::collections::HashSet;
 
-pub fn solve1(input_text: &str) -> String {
+pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 	let mut map = HashMap::new();
 	let mut total2: u64 = 0;
 	let mut total3: u64 = 0;
@@ -22,10 +22,10 @@ pub fn solve1(input_text: &str) -> String {
 			}
 		}
 	}
-	(total2 * total3).to_string()
+	Ok((total2 * total3).to_string())
 }
 
-pub fn solve2(input_text: &str) -> String {
+pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 	let mut seen = HashSet::new();
 	for line in input_text.lines() {
 		for i in 0..line.len() {
@@ -36,10 +36,10 @@ pub fn solve2(input_text: &str) -> String {
 			if seen.contains(&string) {
 				let mut result = String::from(&line[0..1]);
 				result.push_str(&line[i+1..line.len()]);
-				return result;
+				return Ok(result);
 			}
 			seen.insert(string);
 		}
 	}
-	"Failed".to_owned()
+	Err("Failed to find a result for Day 2 part 2")
 }
