@@ -1,4 +1,5 @@
 extern crate regex;
+extern crate itertools;
 
 mod day1;
 mod day2;
@@ -14,6 +15,7 @@ fn main() {
 	println!("--- Day 1 ---");
     timeit(" 1", &day1::solve1, &data[..]);
     timeit(" 2", &day1::solve2, &data[..]);
+    timeit("2b", &day1::solve2b, &data[..]);
     
 	let data = fs::read_to_string("02.txt").expect("Unable to read file");
 	println!("\n--- Day 2 ---");

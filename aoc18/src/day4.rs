@@ -19,13 +19,12 @@ fn change_date(month: &str, day: &str, hour: &str) -> usize {
 	result
 }
 
-fn parse_text(input_text: &str) -> (Vec<usize>, HashMap<usize, (usize, Vec<usize>)>, Vec<(usize, usize, bool)>) {
+fn parse_text(input_text: &str) -> (Vec<usize>, Vec<(usize, usize, bool)>) {
 	//regex
 	let guard_re = Regex::new(r"\[1518\-(\d{2})\-(\d{2}) (\d{2}):(\d{2})\] (?:Guard #(\d+) begins shift)").unwrap();
 	let action_re = Regex::new(r"\[1518\-(\d{2})\-(\d{2}) (\d{2}):(\d{2})\] (falls asleep|wakes up)").unwrap();
 
 	let mut dates_to_guards = vec![0usize;1232];
-	let guards = HashMap::new();
 	
 	for cap in guard_re.captures_iter(input_text) {
 		let id: usize = cap[5].parse().unwrap();
@@ -42,7 +41,7 @@ fn parse_text(input_text: &str) -> (Vec<usize>, HashMap<usize, (usize, Vec<usize
 
 	guard_actions.sort_by(|a, b| if a.0 == b.0 { a.1.cmp(&b.1) } else { a.0.cmp(&b.0) });
 
-	(dates_to_guards, guards, guard_actions)
+	(dates_to_guards, guard_actions)
 }
 
 fn guards_insert() -> (usize, Vec<usize>) {
@@ -50,10 +49,10 @@ fn guards_insert() -> (usize, Vec<usize>) {
 }
 
 pub fn solve1(input_text: &str) -> Result<String, &'static str> {
-	let mut parsed = parse_text(input_text);
+	let parsed = parse_text(input_text);
 	let dates_to_guards = parsed.0;
-	let guards = &mut parsed.1;
-	let guard_actions = parsed.2;
+	let mut guards = HashMap::new();
+	let guard_actions = parsed.1;
 
 	let mut prev_sleep = 0;
 	let mut max_sleep = 0;
@@ -85,10 +84,10 @@ pub fn solve1(input_text: &str) -> Result<String, &'static str> {
 }
 
 pub fn solve2(input_text: &str) -> Result<String, &'static str> {
-	let mut parsed = parse_text(input_text);
+	let parsed = parse_text(input_text);
 	let dates_to_guards = parsed.0;
-	let guards = &mut parsed.1;
-	let guard_actions = parsed.2;
+	let mut guards = HashMap::new();
+	let guard_actions = parsed.1;
 
 	let mut prev_sleep = 0;
 	let mut max_sleep = 0;
