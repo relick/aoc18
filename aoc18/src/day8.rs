@@ -21,10 +21,9 @@ fn get_sum_metadata(input_nums: &Vec<u64>, index: usize) -> (u64, usize) {
 }
 
 pub fn solve1(input_text: &str) -> Result<String, &'static str> {
-	let num_re = Regex::new(r"(\d+)").unwrap();
 	let mut nums = Vec::new();
-	for cap in num_re.captures_iter(input_text) {
-		nums.push(cap[1].parse::<u64>().unwrap());
+	for num in input_text.split_whitespace() {
+		nums.push(num.parse::<u64>().unwrap());
 	}
 
 	Ok(get_sum_metadata(&nums, 0).0.to_string())
@@ -58,10 +57,9 @@ fn get_value_of_root(input_nums: &Vec<u64>, index: usize) -> (u64, usize) {
 }
 
 pub fn solve2(input_text: &str) -> Result<String, &'static str> {
-	let num_re = Regex::new(r"(\d+)").unwrap();
 	let mut nums = Vec::new();
-	for cap in num_re.captures_iter(input_text) {
-		nums.push(cap[1].parse::<u64>().unwrap());
+	for num in input_text.split_whitespace() {
+		nums.push(num.parse::<u64>().unwrap());
 	}
 
 	Ok(get_value_of_root(&nums, 0).0.to_string())
