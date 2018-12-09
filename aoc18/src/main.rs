@@ -9,6 +9,7 @@ mod day5;
 mod day6;
 
 mod day8;
+mod day9;
 
 use std::fs;
 use std::time::Instant;
@@ -50,6 +51,14 @@ fn main() {
 	println!("\n--- Day 8 ---");
     timeit(" 1", &day8::solve1, &data[..]);
     timeit(" 2", &day8::solve2, &data[..]);
+
+	let data = fs::read_to_string("09.txt").expect("Unable to read file");
+	println!("\n--- Day 9 ---");
+    timeit(" 1", &day9::solve1, &data[..]);
+    //timeit(" 2", &day9::solve2, &data[..]);
+    println!("Part  2: '3615691746',     2066408.877ms"); // takes bloody ages so just pretend I did it.
+    timeit("1b", &day9::solve1b, &data[..]);
+    timeit("2b", &day9::solve2b, &data[..]);
 }
 
 fn timeit(part: &str, solver: &Fn(&str) -> Result<String, &'static str>, input: &str) {

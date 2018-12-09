@@ -1,5 +1,3 @@
-use regex::Regex;
-
 fn get_sum_metadata(input_nums: &Vec<u64>, index: usize) -> (u64, usize) {
 	let num_nodes = input_nums[index] as usize;
 	let num_metadata = input_nums[index + 1] as usize;
