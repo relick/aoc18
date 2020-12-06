@@ -41,9 +41,7 @@ pub fn solve2(input_text: &str) -> Result<String, &'static str> {
 
 	//grid
 	let mut grid_dat = vec![0u32; 1000 * 1000];
-
 	let mut grid_base: Vec<_> = grid_dat.as_mut_slice().chunks_mut(1000).collect();
-
 	let grid: &mut [&mut [_]] = grid_base.as_mut_slice();
 
 	let mut lazy_list = vec![false; data.len()];
